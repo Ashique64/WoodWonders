@@ -43,10 +43,11 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
+    'user',
 ]
 
 
-CORS_ORGIN_ALLOW_ALL = False
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -68,11 +69,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
-        # os.path.join(BASE_DIR, 'frontend/build')
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -138,8 +139,8 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'frontend/src/build/static')
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/src/build/static')]
 
 
 # Default primary key field type
@@ -163,7 +164,7 @@ REST_FRAMEWORK = {
 
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True
