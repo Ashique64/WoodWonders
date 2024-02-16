@@ -7,6 +7,8 @@ import { Row } from "react-bootstrap";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import "./Home.css";
 import HomeCard from "../../components/HomeCards/HomeCard";
+import FooterBanner from "../../components/FooterBanner/FooterBanner";
+import Footer from "../../components/Footer/Footer";
 
 const Home = () => {
     return (
@@ -35,6 +37,8 @@ const Home = () => {
                 </Row>
             </Container-fluid>
             <HomeCard/>
+            <FooterBanner/>
+            <Footer/>
         </div>
     );
 };
