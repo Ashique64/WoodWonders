@@ -65,7 +65,7 @@ const Signup = () => {
                         </p>
                         <div className="child-2-form">
                             <input required name="userName" placeholder="User Name" type="text" />
-                            <input required name="phoneNumber" placeholder="Phone Number" type="Phone" />
+                            <input required name="phoneNumber" placeholder="Phone Number" type="phone" />
                             <input required name="email" placeholder="E-mail Address" type="email" />
                             <input required name="password" placeholder="Password" type={Password ? "text" : "password"} />
                             <FontAwesomeIcon icon={Password ? faEye : faEyeSlash} onClick={PasswordVisibility} size="sm" />
