@@ -9,9 +9,10 @@ import axios from "axios";
 const Signup = () => {
     const navigate = useNavigate();
 
-    // const baseURL='http://127.0.0.1:8000'
+    const baseURL = "http://127.0.0.1:8000";
     const [Password, setPaswword] = useState(false);
     const [ConfirmPassword, setConfirmPassword] = useState(false);
+    const [error, setError] = useState("");
 
     const PasswordVisibility = () => {
         setPaswword(!Password);
@@ -21,34 +22,36 @@ const Signup = () => {
         setConfirmPassword(!ConfirmPassword);
     };
 
-    // const [formData, setFormData] = useState({
-    //     userName : '',
-    //     phoneNumber : '',
-    //     email : '',
-    //     password : '',
-    //     confirmPassword : ''
-    // })
+    const [formData, setFormData] = useState({
+        user_name: "",
+        phone_number: "",
+        email: "",
+        password: "",
+        confirm_password: "",
+    });
 
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target
-    //     setFormData(prevState => ({
-    //         ...prevState,
-    //         [name]: value
-    //     }));
-    // }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+        console.log(formData);
+    };
 
-    // const handleSubmit = async () => {
-    //     try {
-    //         const response = await axios.post(`${baseURL}/signup`, formData)
-    //         console.log(response.data)
-    //         navigate('/otp')
-    //     } catch (error) {
-    //         console.error('Error:', error)
-    //     }
-    // }
-
-    const handleSubmit = () => {
-        navigate("/otp");
+    const handleSubmit = async () => {
+        try {
+            const response = await axios.post(`${baseURL}/signup`, formData);
+            console.log(response.data);
+            navigate("/otp");
+        } catch (error) {
+            console.error("Error:", error);
+            if (error.response && error.response.status === 400) {
+                setError("Username already exists. Please choose a different one.");
+            } else {
+                setError("An error occurred. Please try again later.");
+            }
+        }
     };
 
     return (
@@ -64,16 +67,47 @@ const Signup = () => {
                             Already have an account? <a href="">Log in</a>
                         </p>
                         <div className="child-2-form">
-                            <input required name="userName" placeholder="User Name" type="text" />
-                            <input required name="phoneNumber" placeholder="Phone Number" type="phone" />
-                            <input required name="email" placeholder="E-mail Address" type="email" />
-                            <input required name="password" placeholder="Password" type={Password ? "text" : "password"} />
+                            {error && <div className="error-message">{error}</div>}
+                            <input
+                                required
+                                name="user_name"
+                                placeholder="User Name"
+                                value={formData.user_name}
+                                onChange={handleChange}
+                                type="text"
+                            />
+                            <input
+                                required
+                                name="phone_number"
+                                placeholder="Phone Number"
+                                value={formData.phone_number}
+                                onChange={handleChange}
+                                type="tel"
+                            />
+                            <input
+                                required
+                                name="email"
+                                placeholder="E-mail Address"
+                                value={formData.email}
+                                onChange={handleChange}
+                                type="email"
+                            />
+                            <input
+                                required
+                                name="password"
+                                placeholder="Password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                type={Password ? "text" : "password"}
+                            />
                             <FontAwesomeIcon icon={Password ? faEye : faEyeSlash} onClick={PasswordVisibility} size="sm" />
                             <input
                                 required
-                                name="confirmPassword"
+                                name="confirm_password"
                                 placeholder="Confirm Password"
                                 type={ConfirmPassword ? "text" : "password"}
+                                value={formData.confirm_password}
+                                onChange={handleChange}
                             />
                             <FontAwesomeIcon
                                 icon={ConfirmPassword ? faEye : faEyeSlash}

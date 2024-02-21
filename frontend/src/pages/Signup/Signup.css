@@ -79,6 +79,11 @@
     color: black;
 }
 
+.error-message {
+    color: red;
+    font-size: 12px;
+}
+
 @media (max-width: 768px) {
     .child-1 {
         display: none;

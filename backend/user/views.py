@@ -4,24 +4,22 @@ from rest_framework import generics, status
 from .models import User
 from .serializer import UserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.db import IntegrityError
 
 # Create your views here.
 
-class UserSignupView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
-    def perform_create(self, serializer):
-        try:
-            user = serializer.save()
-            refresh = RefreshToken.for_user(user)
-            print(refresh)
-            content = {
-                'Message': 'User Registered Successfully',
-                'user': serializer.data,
-                'refresh': str(refresh),
-                'access': str(refresh.access_token),
-            }
-            return Response(content, status=status.HTTP_201_CREATED)
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+class UserSignupView(generics.CreateAPIView):
+
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            try:
+                serializer.save()
+                content = {'message': 'User registered successfully'}
+                return Response(content, status=status.HTTP_201_CREATED)
+            except IntegrityError as e:
+                error_message = "User Name Already Exist"
+                return Response({'error': error_message}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
