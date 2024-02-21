@@ -16,6 +16,8 @@ const Signup = () => {
     const [userNameError, setUserNameError] = useState("");
     const [phoneNumberError, setPhoneNumberError] = useState("");
     const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
     const togglePasswordVisibility = () => {
         setPassword(!Password);
@@ -46,10 +48,24 @@ const Signup = () => {
             setPhoneNumberError("");
         } else if (name === "email") {
             setEmailError("");
+        } else if (name === "password") {
+            setPasswordError("");
+        } else if (name === "confirm_password") {
+            setConfirmPasswordError("");
         }
     };
 
     const handleSubmit = async () => {
+        if (formData.password.length < 8) {
+            setPasswordError("Password must be at least 8 characters long.");
+            return;
+        }
+
+        if (formData.password !== formData.confirm_password) {
+            setConfirmPasswordError("Passwords do not match.");
+            return;
+        }
+
         try {
             const response = await axios.post(`${baseURL}/signup`, formData);
             navigate("/otp");
@@ -58,7 +74,6 @@ const Signup = () => {
             setPhoneNumberError("");
             setEmailError("");
         } catch (error) {
-            
             if (error.response) {
                 const responseData = error.response.data;
                 if (responseData.error) {
@@ -120,6 +135,7 @@ const Signup = () => {
                                 onChange={handleChange}
                                 type="email"
                             />
+                            {passwordError && <div className="error-message">{passwordError}</div>}
                             <input
                                 required
                                 name="password"
@@ -133,6 +149,7 @@ const Signup = () => {
                                 onClick={togglePasswordVisibility}
                                 size="sm"
                             />
+                            {confirmPasswordError && <div className="error-message">{confirmPasswordError}</div>}
                             <input
                                 required
                                 name="confirm_password"

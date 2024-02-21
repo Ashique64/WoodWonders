@@ -33,7 +33,7 @@ class User(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     
-    objects = UserManager()     # set to an instance of a custom manager 
+    objects = UserManager() 
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['user_name', 'email']
