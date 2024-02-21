@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Signup.css";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button, Container } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
@@ -10,15 +10,18 @@ const Signup = () => {
     const navigate = useNavigate();
 
     const baseURL = "http://127.0.0.1:8000";
-    const [Password, setPaswword] = useState(false);
+    const [Password, setPassword] = useState(false);
     const [ConfirmPassword, setConfirmPassword] = useState(false);
     const [error, setError] = useState("");
+    const [userNameError, setUserNameError] = useState("");
+    const [phoneNumberError, setPhoneNumberError] = useState("");
+    const [emailError, setEmailError] = useState("");
 
-    const PasswordVisibility = () => {
-        setPaswword(!Password);
+    const togglePasswordVisibility = () => {
+        setPassword(!Password);
     };
 
-    const ConfirmPasswordVisibility = () => {
+    const toggleConfirmPasswordVisibility = () => {
         setConfirmPassword(!ConfirmPassword);
     };
 
@@ -36,18 +39,41 @@ const Signup = () => {
             ...prevState,
             [name]: value,
         }));
-        console.log(formData);
+
+        if (name === "user_name") {
+            setUserNameError("");
+        } else if (name === "phone_number") {
+            setPhoneNumberError("");
+        } else if (name === "email") {
+            setEmailError("");
+        }
     };
 
     const handleSubmit = async () => {
         try {
             const response = await axios.post(`${baseURL}/signup`, formData);
-            console.log(response.data);
             navigate("/otp");
+
+            setUserNameError("");
+            setPhoneNumberError("");
+            setEmailError("");
         } catch (error) {
-            console.error("Error:", error);
-            if (error.response && error.response.status === 400) {
-                setError("Username already exists. Please choose a different one.");
+            
+            if (error.response) {
+                const responseData = error.response.data;
+                if (responseData.error) {
+                    setError(responseData.error);
+                } else {
+                    if (responseData.user_name) {
+                        setUserNameError(responseData.user_name[0]);
+                    }
+                    if (responseData.phone_number) {
+                        setPhoneNumberError(responseData.phone_number[0]);
+                    }
+                    if (responseData.email) {
+                        setEmailError(responseData.email[0]);
+                    }
+                }
             } else {
                 setError("An error occurred. Please try again later.");
             }
@@ -55,7 +81,7 @@ const Signup = () => {
     };
 
     return (
-        <Container-fluid>
+        <Container fluid>
             <Row>
                 <Col md={7} className="child-1">
                     <h3 className="child-1-text">WoodWonders</h3>
@@ -67,7 +93,7 @@ const Signup = () => {
                             Already have an account? <a href="">Log in</a>
                         </p>
                         <div className="child-2-form">
-                            {error && <div className="error-message">{error}</div>}
+                            {userNameError && <div className="error-message">{userNameError}</div>}
                             <input
                                 required
                                 name="user_name"
@@ -76,6 +102,7 @@ const Signup = () => {
                                 onChange={handleChange}
                                 type="text"
                             />
+                            {phoneNumberError && <div className="error-message">{phoneNumberError}</div>}
                             <input
                                 required
                                 name="phone_number"
@@ -84,6 +111,7 @@ const Signup = () => {
                                 onChange={handleChange}
                                 type="tel"
                             />
+                            {emailError && <div className="error-message">{emailError}</div>}
                             <input
                                 required
                                 name="email"
@@ -100,7 +128,11 @@ const Signup = () => {
                                 onChange={handleChange}
                                 type={Password ? "text" : "password"}
                             />
-                            <FontAwesomeIcon icon={Password ? faEye : faEyeSlash} onClick={PasswordVisibility} size="sm" />
+                            <FontAwesomeIcon
+                                icon={Password ? faEye : faEyeSlash}
+                                onClick={togglePasswordVisibility}
+                                size="sm"
+                            />
                             <input
                                 required
                                 name="confirm_password"
@@ -111,15 +143,17 @@ const Signup = () => {
                             />
                             <FontAwesomeIcon
                                 icon={ConfirmPassword ? faEye : faEyeSlash}
-                                onClick={ConfirmPasswordVisibility}
+                                onClick={toggleConfirmPasswordVisibility}
                                 size="sm"
                             />
+
+                            {error && <div className="error-message">{error}</div>}
                             <Button onClick={handleSubmit}>Sign up</Button>
                         </div>
                     </div>
                 </Col>
             </Row>
-        </Container-fluid>
+        </Container>
     );
 };
 
