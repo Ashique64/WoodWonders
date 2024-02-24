@@ -42,16 +42,24 @@ const Signup = () => {
             [name]: value,
         }));
 
-        if (name === "user_name") {
-            setUserNameError("");
-        } else if (name === "phone_number") {
-            setPhoneNumberError("");
-        } else if (name === "email") {
-            setEmailError("");
-        } else if (name === "password") {
-            setPasswordError("");
-        } else if (name === "confirm_password") {
-            setConfirmPasswordError("");
+        switch(name) {
+            case "user_name":
+                setUserNameError("");
+                break;
+            case "phone_number":
+                setPhoneNumberError("");
+                break;
+            case "email":
+                setEmailError("");
+                break;
+            case "password":
+                setPasswordError("");
+                break;
+            case "confirm_password":
+                setConfirmPasswordError("");
+                break;
+            default:
+                break;
         }
     };
 
