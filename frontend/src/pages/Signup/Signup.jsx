@@ -28,7 +28,7 @@ const Signup = () => {
     };
 
     const [formData, setFormData] = useState({
-        user_name: "",
+        username: "",
         phone_number: "",
         email: "",
         password: "",
@@ -76,7 +76,7 @@ const Signup = () => {
 
         try {
             const response = await axios.post(`${baseURL}/signup`, formData);
-            navigate("/otp");
+            navigate("/login");
 
             setUserNameError("");
             setPhoneNumberError("");
@@ -87,8 +87,8 @@ const Signup = () => {
                 if (responseData.error) {
                     setError(responseData.error);
                 } else {
-                    if (responseData.user_name) {
-                        setUserNameError(responseData.user_name[0]);
+                    if (responseData.username) {
+                        setUserNameError(responseData.username[0]);
                     }
                     if (responseData.phone_number) {
                         setPhoneNumberError(responseData.phone_number[0]);
@@ -103,6 +103,10 @@ const Signup = () => {
         }
     };
 
+    const handleAlreadyLogin = () => {
+        navigate("/login")
+    }
+
     return (
         <Container fluid>
             <Row>
@@ -113,15 +117,15 @@ const Signup = () => {
                     <div className="child-2-items">
                         <h3>Sign up</h3>
                         <p>
-                            Already have an account? <a href="">Log in</a>
+                            Already have an account? <a onClick={handleAlreadyLogin} href="">Log in</a>
                         </p>
                         <div className="child-2-form">
                             {userNameError && <div className="error-message">{userNameError}</div>}
                             <input
                                 required
-                                name="user_name"
+                                name="username"
                                 placeholder="User Name"
-                                value={formData.user_name}
+                                value={formData.username}
                                 onChange={handleChange}
                                 type="text"
                             />

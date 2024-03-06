@@ -1,8 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AdminLogin.css";
 import { Button, Col, Container, Row } from "react-bootstrap";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
+    const baseURL = "http://127.0.0.1:8000";
+    const [formData, setFormData] = useState({
+        username: "",
+        password: "",
+    });
+
+    const navigate = useNavigate()
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
+    const handleLogin = () => {
+        axios
+            .post(`${baseURL}/admin_login`, formData)
+            .then((response) => {
+                console.log(response.data);
+                navigate('/admin_home')
+                setFormData({ username: "", password: "" });
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    };
+
     return (
         <Container fluid>
             <Row>
@@ -10,9 +41,23 @@ const AdminLogin = () => {
                     <div className="admin-login-box">
                         <h4>Sign in to your admin account</h4>
                         <h6>Welcome back! please enter your details</h6>
-                        <input required placeholder="E-mail" type="text" />
-                        <input required placeholder="Password" type="password" />
-                        <Button>Sign in</Button>
+                        <input
+                            required
+                            placeholder="User Name"
+                            name="username"
+                            value={formData.username}
+                            onChange={handleChange}
+                            type="text"
+                        />
+                        <input
+                            required
+                            placeholder="Password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            type="password"
+                        />
+                        <Button onClick={handleLogin}>Sign in</Button>
                     </div>
                 </Col>
             </Row>
