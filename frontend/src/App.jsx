@@ -1,5 +1,4 @@
 import "./App.css";
-import Forgotpass from "./pages/ForgotPass/Forgotpass";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup/Signup";
@@ -14,7 +13,6 @@ function App() {
             <Routes>
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/forgotpass" element={<Forgotpass />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/admin_login" element={<AdminLogin />} />
                 <Route path="/admin_home" element={<AdminDashboard />} />

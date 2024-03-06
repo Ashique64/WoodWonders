@@ -82,14 +82,6 @@
     color: black;
 }
 
-.login-child-2-form h6 {
-    font-weight: 700;
-    font-size: 14px;
-    display: inline;
-    float: right;
-    margin-right: 35px;
-    cursor: pointer;
-}
 
 
 @media (max-width: 768px) {

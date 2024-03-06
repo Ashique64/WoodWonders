@@ -52,8 +52,9 @@ class UserLoginView(APIView):
         password = request.data.get('password')
 
         if username and password:
-            try:
-                user = authenticate(request,username=username,password=password)
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
                 login(request, user)
                 # refresh = RefreshToken.for_user(user)
                 serializer = UserSerializer(user)
@@ -65,9 +66,8 @@ class UserLoginView(APIView):
                     # "access": str(refresh.access_token),
                 }
                 return Response(content, status=status.HTTP_200_OK)
-            except Users.DoesNotExist:
-                return Response({"error": "User does not exist"}, status=status.HTTP_404_NOT_FOUND)
-            except Exception as e:
-                return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            else:
+                return Response({"error": "Invalid username or password"}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response({"error": "Username and password are required"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "Username and password are required"}, status=status.HTTP_401_UNAUTHORIZED)
+        

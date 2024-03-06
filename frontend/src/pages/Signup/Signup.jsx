@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -29,6 +31,7 @@ const Signup = () => {
 
     const [formData, setFormData] = useState({
         username: "",
+        country_code: "+91",
         phone_number: "",
         email: "",
         password: "",
@@ -64,6 +67,9 @@ const Signup = () => {
     };
 
     const handleSubmit = async () => {
+
+        const phoneNumberWithCountryCode = formData.country_code + formData.phone_number;
+
         if (formData.password.length < 8) {
             setPasswordError("Password must be at least 8 characters long.");
             return;
@@ -75,7 +81,7 @@ const Signup = () => {
         }
 
         try {
-            const response = await axios.post(`${baseURL}/signup`, formData);
+            const response = await axios.post(`${baseURL}/signup`,{ ...formData,phone_number:phoneNumberWithCountryCode });
             navigate("/login");
 
             setUserNameError("");
@@ -103,10 +109,6 @@ const Signup = () => {
         }
     };
 
-    const handleAlreadyLogin = () => {
-        navigate("/login")
-    }
-
     return (
         <Container fluid>
             <Row>
@@ -117,7 +119,7 @@ const Signup = () => {
                     <div className="child-2-items">
                         <h3>Sign up</h3>
                         <p>
-                            Already have an account? <a onClick={handleAlreadyLogin} href="">Log in</a>
+                            Already have an account? <Link to="/login">Log in</Link>
                         </p>
                         <div className="child-2-form">
                             {userNameError && <div className="error-message">{userNameError}</div>}
