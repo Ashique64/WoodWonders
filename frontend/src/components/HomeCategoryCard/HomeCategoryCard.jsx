@@ -1,6 +1,6 @@
 import React from 'react'
-import "./HomeCategoryCard.css"
 import { Col, Row } from 'react-bootstrap'
+import "./HomeCategoryCard.scss"
 
 const HomeCategoryCard = () => {
   return (

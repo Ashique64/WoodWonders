@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Signup.css";
 import { Row, Col, Button, Container, Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -7,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import baseURL from "../../../api/api";
+import "./Signup.scss";
 
 const Signup = () => {
     const navigate = useNavigate();

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Login.css";
 import { Row, Col, Container, Button, Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -7,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import baseURL from "../../../api/api";
+import "./Login.scss";
 
 const Login = () => {
     const navigate = useNavigate();

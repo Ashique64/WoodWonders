@@ -1,0 +1,42 @@
+.nav-row {
+    padding: 0px 80px;
+    border-bottom: 1px solid #bdc0c1;
+}
+
+.nav {
+    height: 14vh;
+    display: flex;
+    align-items: center;
+
+    &-child-1 {
+        h3 {
+            font-size: 24px;
+        }
+    }
+
+    &-child-2 {
+        display: flex;
+        justify-content: space-evenly;
+
+        a {
+            text-decoration: none;
+            color: #6C7275;
+        }
+    }
+
+    &-child-3 {
+        display: flex;
+        justify-content: end;
+
+        ul {
+            display: flex;
+            list-style: none;
+
+            li {
+                margin: 12px;
+                margin-top: 25px;
+                cursor: pointer;
+            }
+        }
+    }
+}

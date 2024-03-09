@@ -1,0 +1,33 @@
+.admin-user {
+    background-color: #383854;
+    min-height: 100vh;
+
+    &-child-1-items {
+        display: flex;
+        justify-content: space-between;
+
+        h5 {
+            color: white;
+            font-size: 32px;
+        }
+
+        select {
+            color: white;
+            background-color: #2E2E48;
+            font-size: 12px;
+            height: 32px;
+            width: 120px;
+            margin-top: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    }
+
+    &-child-2 {
+        padding-top: 50px;
+    }
+}
+
+.table-responsive {
+    overflow-x: auto;
+}

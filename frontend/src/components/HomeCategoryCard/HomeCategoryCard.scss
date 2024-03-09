@@ -1,0 +1,32 @@
+.home-category-child {
+    padding: 0px 80px;
+    padding-bottom: 35px;
+
+    img {
+        width: 100%;
+        height: 40vh;
+        object-fit: cover;
+        object-position: center;
+        padding: 0px 20px 20px 0px ;
+    }
+
+    h4 {
+        color: #6C7275;
+        cursor: pointer;
+
+        &:hover {
+            color: #0e0e0e;
+        }
+    }
+
+    a {
+        cursor: pointer;
+        text-decoration: underline;
+        color: black;
+
+        &:hover {
+            text-decoration: none;
+            color: #e1bc60;
+        }
+    }
+}

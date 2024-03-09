@@ -1,8 +1,7 @@
 import React from "react";
-import "./ProductCard.css";
-import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import "./ProductCard.scss";
 
 const ProductCard = () => {
     return (

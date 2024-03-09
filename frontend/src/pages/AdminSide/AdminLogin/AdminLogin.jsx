@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./AdminLogin.css";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import baseURL from "../../../api/api";
+import "./AdminLogin.scss";
 
 const AdminLogin = () => {
     const [formData, setFormData] = useState({

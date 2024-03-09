@@ -1,8 +1,8 @@
 import React from "react";
-import "./NavBar.css";
 import { Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faShoppingCart, faHeart } from "@fortawesome/free-solid-svg-icons";
+import "./NavBar.scss";
 
 const NavBar = () => {
     return (

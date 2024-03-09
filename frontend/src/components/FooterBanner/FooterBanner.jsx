@@ -1,6 +1,6 @@
 import React from "react";
-import "./FooterBanner.css";
 import { Col, Row } from "react-bootstrap";
+import "./FooterBanner.scss";
 
 const FooterBanner = () => {
     return (

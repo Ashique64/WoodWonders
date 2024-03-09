@@ -1,8 +1,8 @@
 import React from "react";
-import "./HomeCard.css";
 import { Col, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShieldAlt, faPhoneAlt, faMoneyBillWave } from "@fortawesome/free-solid-svg-icons";
+import "./HomeCard.scss";
 
 const HomeCard = () => {
     return (

@@ -5,10 +5,10 @@ import HomeBanner from "../../../components/HomeBanner/HomeBanner";
 import HomeCategoryCard from "../../../components/HomeCategoryCard/HomeCategoryCard";
 import { Row } from "react-bootstrap";
 import ProductCard from "../../../components/ProductCard/ProductCard";
-import "./Home.css";
 import HomeCard from "../../../components/HomeCards/HomeCard";
 import FooterBanner from "../../../components/FooterBanner/FooterBanner";
 import Footer from "../../../components/Footer/Footer";
+import "./Home.scss";
 
 const Home = () => {
     return (

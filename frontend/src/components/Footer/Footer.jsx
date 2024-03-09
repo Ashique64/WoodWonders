@@ -1,8 +1,8 @@
 import React from "react";
-import "./Footer.css";
 import { Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp, faInstagram, faFacebook, faYoutube } from "@fortawesome/free-brands-svg-icons";
+import "./Footer.scss";
 
 const Footer = () => {
     return (

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "./AdminUser.css";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import AdminSidebar from "../../../components/AdminSidebar/AdminSidebar";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import baseURL from "../../../api/api";
+import "./AdminUser.scss";
 
 const AdminUser = () => {
     const [users, setUsers] = useState([]);

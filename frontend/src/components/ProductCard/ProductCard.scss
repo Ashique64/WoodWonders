@@ -1,0 +1,33 @@
+.product-card {
+    width: 285px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+
+    &-child-1 img {
+        width: 225px;
+        height: 270px;
+        object-fit: fill;
+        object-position: center;
+        cursor: pointer;
+    }
+
+    &-child-2 {
+        margin-top: 10px;
+
+        .product-card-rating {
+            padding: 5px 0px;
+            cursor: pointer;
+
+            .star-icon {
+                color: rgb(160, 160, 9);
+            }
+        }
+
+        h6 {
+            padding-top: 7px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+    }
+}

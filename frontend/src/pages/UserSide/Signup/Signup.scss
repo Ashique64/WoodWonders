@@ -1,0 +1,95 @@
+.child-1 {
+    background-image: url("/Images/static/sven-brandsma-GZ5cKOgeIB0-unsplash.jpg");
+    background-size: cover;
+    height: 100vh;
+    padding: 0;
+
+    &-text {
+        margin-top: 20px;
+        color: white;
+        letter-spacing: 4px;
+        text-shadow: 2px 2px 7px rgb(255, 255, 255);
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.child-2 {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-items {
+        text-align: left;
+        padding-left: 90px;
+
+        h3 {
+            font-size: 40px;
+        }
+
+        p {
+            font-size: 14px;
+            color: #6c7275;
+            margin-top: 15px;
+
+            a {
+                color: #38cb89;
+                font-weight: 700;
+            }
+        }
+    }
+
+    &-form {
+        margin-top: 20px;
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            background-color: #fff;
+            color: rgb(18, 17, 17);
+            cursor: pointer;
+
+            &::placeholder {
+                font-size: 14px;
+                color: #6c7275;
+            }
+        }
+
+        Button {
+            width: 90%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #000000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.5s ease;
+
+            &:hover {
+                background-color: #ffffff;
+                border: 2px solid black;
+                color: black;
+            }
+        }
+    }
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+}
+
+@media (max-width: 768px) {
+    .child-1 {
+        display: none;
+    }
+
+    .child-2-items {
+        padding-left: 35px;
+    }
+}

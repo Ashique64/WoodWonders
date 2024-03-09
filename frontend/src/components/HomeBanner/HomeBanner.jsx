@@ -1,6 +1,6 @@
 import React from "react";
-import "./HomeBanner.css";
 import { Col, Row } from "react-bootstrap";
+import "./HomeBanner.scss";
 
 const HomeBanner = () => {
     return (
