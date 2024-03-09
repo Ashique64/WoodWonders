@@ -1,14 +1,14 @@
 import React from "react";
-import NavBar from "../../components/NavBar/navbar";
+import NavBar from "../../../components/NavBar/navbar";
 import { useNavigate } from "react-router-dom";
-import HomeBanner from "../../components/HomeBanner/HomeBanner";
-import HomeCategoryCard from "../../components/HomeCategoryCard/HomeCategoryCard";
+import HomeBanner from "../../../components/HomeBanner/HomeBanner";
+import HomeCategoryCard from "../../../components/HomeCategoryCard/HomeCategoryCard";
 import { Row } from "react-bootstrap";
-import ProductCard from "../../components/ProductCard/ProductCard";
+import ProductCard from "../../../components/ProductCard/ProductCard";
 import "./Home.css";
-import HomeCard from "../../components/HomeCards/HomeCard";
-import FooterBanner from "../../components/FooterBanner/FooterBanner";
-import Footer from "../../components/Footer/Footer";
+import HomeCard from "../../../components/HomeCards/HomeCard";
+import FooterBanner from "../../../components/FooterBanner/FooterBanner";
+import Footer from "../../../components/Footer/Footer";
 
 const Home = () => {
     return (

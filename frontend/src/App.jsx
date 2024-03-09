@@ -1,11 +1,11 @@
 import "./App.css";
-import Login from "./pages/Login/Login";
-import Home from "./pages/Home/Home";
-import Signup from "./pages/Signup/Signup";
+import Home from "./pages/UserSide/Home/Home";
+import Signup from "./pages/UserSide/Signup/Signup";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AdminLogin from "./pages/AdminLogin/AdminLogin";
-import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
-import AdminUser from "./pages/AdminUser/AdminUser";
+import AdminLogin from "./pages/AdminSide/AdminLogin/AdminLogin";
+import AdminDashboard from "./pages/AdminSide/AdminDashboard/AdminDashboard";
+import AdminUser from "./pages/AdminSide/AdminUser/AdminUser";
+import Login from "./pages/UserSide/Login/Login";
 
 function App() {
     return (

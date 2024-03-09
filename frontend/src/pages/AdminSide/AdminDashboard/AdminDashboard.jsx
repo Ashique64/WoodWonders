@@ -1,6 +1,6 @@
 import React from "react";
 import "./AdminDashboard.css";
-import AdminSidebar from "../../components/AdminSidebar/AdminSidebar";
+import AdminSidebar from "../../../components/AdminSidebar/AdminSidebar";
 import { Col, Container, Row } from "react-bootstrap";
 
 const AdminDashboard = () => {

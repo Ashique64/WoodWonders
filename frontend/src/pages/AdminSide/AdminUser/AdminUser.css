@@ -26,3 +26,6 @@
 .admin-user-child-2 {
     padding-top: 50px;
 }
+.table-responsive {
+    overflow-x: auto;
+}

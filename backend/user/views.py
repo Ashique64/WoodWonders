@@ -56,14 +56,14 @@ class UserLoginView(APIView):
 
             if user is not None:
                 login(request, user)
-                # refresh = RefreshToken.for_user(user)
+                refresh = RefreshToken.for_user(user)
                 serializer = UserSerializer(user)
                 content = {
                     "status": "success",
                     "message": "Login successful",
                     "user": serializer.data,
-                    # "refresh": str(refresh),
-                    # "access": str(refresh.access_token),
+                    "refresh": str(refresh),
+                    "access": str(refresh.access_token)
                 }
                 return Response(content, status=status.HTTP_200_OK)
             else:

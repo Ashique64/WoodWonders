@@ -35,6 +35,10 @@
     cursor: pointer;
 }
 
+.admin-sidebar-item a {
+    color: white;
+}
+
 .admin-sidebar-item:hover {
     background-color: #475BE8;
 }

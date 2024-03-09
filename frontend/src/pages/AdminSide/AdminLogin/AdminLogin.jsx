@@ -3,9 +3,9 @@ import "./AdminLogin.css";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import baseURL from "../../../api/api";
 
 const AdminLogin = () => {
-    const baseURL = "http://127.0.0.1:8000";
     const [formData, setFormData] = useState({
         username: "",
         password: "",

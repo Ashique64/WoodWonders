@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Row, Col, Container, Button, Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import baseURL from "../../../api/api";
 
 const Login = () => {
     const navigate = useNavigate();
-    const baseURL = "http://127.0.0.1:8000";
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
-
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         username: "",
         password: "",
@@ -32,11 +32,13 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             const response = await axios.post(`${baseURL}/login`, formData);
             const userid = response.data.user.id;
             navigate("/home");
         } catch (error) {
+            setLoading(false);
             if (error.response) {
                 const { status } = error.response;
                 if (status === 400) {
@@ -52,9 +54,8 @@ const Login = () => {
         }
     };
 
-
     return (
-        <Container-fluid>
+        <Container fluid>
             <Row>
                 <Col md={7} className="login-child-1">
                     <h3 className="login-child-1-text">WoodWonders</h3>
@@ -88,12 +89,19 @@ const Login = () => {
                                 onClick={PasswordVisibility}
                                 size="sm"
                             />
-                            <Button onClick={handleSubmit}>Log in</Button>
+                            <Button onClick={handleSubmit} disabled={loading}>
+                                {loading ? (
+                                    <>
+                                        <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                                        <span className="visually-hidden">Loading...</span>
+                                    </>
+                                ) : ("Log in")}
+                            </Button>
                         </div>
                     </div>
                 </Col>
             </Row>
-        </Container-fluid>
+        </Container>
     );
 };
 

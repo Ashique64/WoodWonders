@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import "./Signup.css";
-import { Row, Col, Button, Container } from "react-bootstrap";
+import { Row, Col, Button, Container, Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import baseURL from "../../../api/api";
 
 const Signup = () => {
     const navigate = useNavigate();
 
-    const baseURL = "http://127.0.0.1:8000";
     const [Password, setPassword] = useState(false);
     const [ConfirmPassword, setConfirmPassword] = useState(false);
     const [error, setError] = useState("");
@@ -20,6 +19,7 @@ const Signup = () => {
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [confirmPasswordError, setConfirmPasswordError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const togglePasswordVisibility = () => {
         setPassword(!Password);
@@ -45,7 +45,7 @@ const Signup = () => {
             [name]: value,
         }));
 
-        switch(name) {
+        switch (name) {
             case "user_name":
                 setUserNameError("");
                 break;
@@ -67,27 +67,34 @@ const Signup = () => {
     };
 
     const handleSubmit = async () => {
+        setLoading(true);
 
         const phoneNumberWithCountryCode = formData.country_code + formData.phone_number;
 
         if (formData.password.length < 8) {
+            setLoading(false);
             setPasswordError("Password must be at least 8 characters long.");
             return;
         }
 
         if (formData.password !== formData.confirm_password) {
+            setLoading(false);
             setConfirmPasswordError("Passwords do not match.");
             return;
         }
 
         try {
-            const response = await axios.post(`${baseURL}/signup`,{ ...formData,phone_number:phoneNumberWithCountryCode });
+            const response = await axios.post(`${baseURL}/signup`, {
+                ...formData,
+                phone_number: phoneNumberWithCountryCode,
+            });
             navigate("/login");
 
             setUserNameError("");
             setPhoneNumberError("");
             setEmailError("");
         } catch (error) {
+            setLoading(false);
             if (error.response) {
                 const responseData = error.response.data;
                 if (responseData.error) {
@@ -179,7 +186,16 @@ const Signup = () => {
                             />
 
                             {error && <div className="error-message">{error}</div>}
-                            <Button onClick={handleSubmit}>Sign up</Button>
+                            <Button onClick={handleSubmit} disabled={loading}>
+                                {loading ? (
+                                    <>
+                                        <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                                        <span className="visually-hidden">Loading...</span>
+                                    </>
+                                ) : (
+                                    "Sign up"
+                                )}
+                            </Button>
                         </div>
                     </div>
                 </Col>
